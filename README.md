@@ -25,7 +25,7 @@ This script scrapes data from the gnome-look.org website to extract the names of
 2. Run the script using Python:
 
 
-python gnome_theme_scraper.py
+       python gnome_theme_scraper.py
 
 
 The script will scrape data from the gnome-look.org website and print a list of popular GNOME theme names along with the total number of themes found.
