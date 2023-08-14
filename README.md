@@ -13,7 +13,7 @@ This script scrapes data from the gnome-look.org website to extract the names of
 1. Install the required packages using pip:
 
 
-    pip install requests-html beautifulsoup4
+       pip install requests-html beautifulsoup4
 
 
 2. Clone this repository or download the script file.
