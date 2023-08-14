@@ -23,7 +23,7 @@ pip install requests-html beautifulsoup4
 
 2. Run the script using Python:
 
-Kopyala
+
 python gnome_theme_scraper.py
 
 
