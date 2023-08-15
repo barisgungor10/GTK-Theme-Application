@@ -1,36 +1,37 @@
 from requests_html import HTMLSession
 from bs4 import BeautifulSoup
 
-# Define a list of URLs to scrape data from
-url_list = [
-    "https://www.gnome-look.org/browse?cat=135&ord=rating",
-    "https://www.gnome-look.org/browse?cat=135&page=2&ord=rating",
-    "https://www.gnome-look.org/browse?cat=135&page=3&ord=rating",
-    "https://www.gnome-look.org/browse?cat=135&page=4&ord=rating",
-    "https://www.gnome-look.org/browse?cat=135&page=5&ord=rating",
-]
-
-# Create an empty list to store the names of the themes
+url_list = {
+    "https://www.pling.com/browse?cat=135&ord=rating",
+    "https://www.pling.com/browse?cat=135&page=2&ord=rating",
+    "https://www.pling.com/browse?cat=135&page=3&ord=rating",
+    "https://www.pling.com/browse?cat=135&page=4&ord=rating",
+    "https://www.pling.com/browse?cat=135&page=5&ord=rating"
+}
 theme_name_list = []
+image_link_list = []
+description_link_list = []
 
-# Loop through each URL in the url_list
 for url in url_list:
-    # Create a new HTMLSession object
     session = HTMLSession()
-    # Send a GET request to the URL and store the response
     response = session.get(url)
-    # Render the HTML of the response
-    response.html.render()
-    # Create a BeautifulSoup object from the rendered HTML
+    response.html.render(timeout=8)
+
     soup = BeautifulSoup(response.html.html, 'html.parser')
-    # Find all div elements with the class "product-browse-list-item container-wide standard"
+
     themes = soup.find_all("div", class_="product-browse-list-item container-wide standard")
 
-    # Loop through each theme element
     for theme in themes:
-        # Find the h2 element within the theme element and append its text to the theme_name_list
         theme_name_list.append(theme.find("h2").text)
 
-# Print the final list of theme names and its length
+        img_tag = theme.find("img")
+        image_link_list.append(img_tag["src"])
+
+        description_link_list.append(theme.find(class_="description").text)
+
 print(theme_name_list)
 print(len(theme_name_list))
+print(image_link_list)
+print(len(image_link_list))
+print((description_link_list))
+print(len(description_link_list))
