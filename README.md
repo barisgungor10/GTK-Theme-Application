@@ -1,6 +1,6 @@
-# GNOME Theme Scraper
+# Pling Theme Scraper
 
-This script scrapes data from the gnome-look.org website to extract the names of popular GNOME themes.
+This script scrapes data from the gnome-look.org website to extract the names of popular Pling Linux themes.
 
 ## Requirements
 
