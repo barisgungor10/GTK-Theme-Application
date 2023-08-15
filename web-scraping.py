@@ -30,8 +30,5 @@ for url in url_list:
         description_link_list.append(theme.find(class_="description").text)
 
 print(theme_name_list)
-print(len(theme_name_list))
 print(image_link_list)
-print(len(image_link_list))
 print((description_link_list))
-print(len(description_link_list))
