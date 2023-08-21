@@ -1,6 +1,8 @@
 from requests_html import HTMLSession
 from bs4 import BeautifulSoup
 
+DOMAIN = "https://www.pling.com/"
+FILETYPE = ".tar.xz"
 url_list = {
     "https://www.pling.com/browse?cat=135&ord=rating",
     "https://www.pling.com/browse?cat=135&page=2&ord=rating",
@@ -29,6 +31,10 @@ for url in url_list:
 
         description_link_list.append(theme.find(class_="description").text)
 
+
 print(theme_name_list)
+print(len(theme_name_list))
 print(image_link_list)
+print(len(image_link_list))
 print((description_link_list))
+print(len(description_link_list))
