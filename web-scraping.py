@@ -1,5 +1,6 @@
 import urllib
 import gi
+
 gi.require_version("Gtk", "3.0")
 
 from gi.repository import Gtk, GdkPixbuf, Gio
@@ -11,7 +12,9 @@ url_list = [
     "https://www.gnome-look.org/browse?cat=135&ord=rating",
     "https://www.gnome-look.org/browse?cat=135&page=2&ord=rating",
     "https://www.gnome-look.org/browse?cat=135&page=3&ord=rating",
-    "https://www.gnome-look.org/browse?cat=135&page=4&ord=rating"
+    "https://www.gnome-look.org/browse?cat=135&page=4&ord=rating",
+    "https://www.gnome-look.org/browse?cat=135&page=5&ord=rating"
+
 ]
 theme_name_list = []
 image_link_list = []
@@ -42,13 +45,35 @@ def scraping():
 scraping()
 
 
+def download_func(widget):
+    print(f"Downloaded {widget}")
+
+
+def on_page_switch(stack_switcher, _):
+    visible_child_name = stack_switcher.get_stack().get_visible_child_name()
+    print(f"Switched to page: {visible_child_name}")
+
+
 class ApplicationWindow(Gtk.Window):
     def _init_(self):
         Gtk.Window._init_(self, title="Theme Application")
 
+        self.set_border_width(10)
+        self.set_default_size(500, 500)
+        self.set_default_size(500, 500)
+        self.set_position(Gtk.WindowPosition.CENTER_ALWAYS)
+
+        header_bar = Gtk.HeaderBar()
+        header_bar.set_show_close_button(True)
+        header_bar.props.title = "Theme Application"
+
         self.stack = Gtk.Stack()
-        self.stack.set_transition_type(Gtk.StackTransitionType.SLIDE_LEFT_RIGHT)
+        self.stack.set_transition_type(Gtk.StackTransitionType.CROSSFADE)
         self.stack.set_transition_duration(500)
+
+        box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
+        Gtk.StyleContext.add_class(box.get_style_context(), "linked")
+        header_bar.pack_start(box)
 
         themes_per_page = 5  # Number of themes per page
         num_pages = -(-len(theme_name_list) // themes_per_page)  # Ceiling division
@@ -96,35 +121,29 @@ class ApplicationWindow(Gtk.Window):
                 description_label.set_line_wrap(True)
                 details_box.pack_start(description_label, False, False, 0)
 
+                theme_box.pack_start(details_box, False, False, 0)
+
                 # Create a horizontal box for the download button
                 download_box = Gtk.Box(spacing=5, orientation=Gtk.Orientation.HORIZONTAL)
                 download_button = Gtk.Button(label="Download")
-                download_button.connect("clicked", self.download_func)
+                download_button.connect("clicked", download_func)
                 download_box.pack_start(download_button, False, False, 0)
-                details_box.pack_start(download_box, False, False, 0)
-
-                theme_box.pack_start(details_box, True, True, 0)
+                theme_box.pack_start(download_box, False, False, 0)
 
                 page_box.pack_start(theme_box, False, False, 0)
 
-            self.stack.add_titled(page_box, f"page{page_num + 1}", f"Page {page_num + 1}")
+            self.stack.add_titled(page_box, f"{page_num + 1}", f"{page_num + 1}")
 
         stack_switcher = Gtk.StackSwitcher()
         stack_switcher.set_stack(self.stack)
 
         main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-        main_box.pack_start(stack_switcher, False, True, 0)
         main_box.pack_start(self.stack, True, True, 0)
+        main_box.pack_start(stack_switcher, False, True, 0)
         self.add(main_box)
 
-        stack_switcher.connect("notify::visible-child", self.on_page_switch)
+        stack_switcher.connect("notify::visible-child", on_page_switch)
 
-    def on_page_switch(self, stack_switcher, _):
-        visible_child_name = stack_switcher.get_stack().get_visible_child_name()
-        print(f"Switched to page: {visible_child_name}")
-
-    def download_func(self, widget):
-        print(f"Downloaded {widget}")
 
 win = ApplicationWindow()
 win.connect("delete-event", Gtk.main_quit)
