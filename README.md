@@ -1,35 +1,58 @@
-# Pling Theme Scraper
+# GTK Theme Application
 
-This script scrapes data from the gnome-look.org website to extract the names of popular Pling Linux themes.
+This repository contains a GTK theme application that allows users to explore and download themes from gnome-look.org. The application is built using the Gtk library and integrates web scraping functionality to fetch theme details. Users can view theme names, descriptions, and images, and download their preferred themes.
 
-## Requirements
+## Table of Contents
 
-- Python 3
-- requests-html
-- BeautifulSoup4
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+
+## Prerequisites
+
+To run the application, you'll need the following prerequisites:
+
+- Python 3.x
+- [Gtk library](https://pygobject.readthedocs.io/en/latest/getting_started.html)
+- [requests-html](https://requests-html.kennethreitz.org/)
+- [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/)
 
 ## Installation
 
-1. Install the required packages using pip:
+1. Clone the repository:
 
+    ```bash
+    git clone https://github.com/yourusername/gtk-theme-app.git
+    cd gtk-theme-app
+    ```
 
-       pip install requests-html beautifulsoup4
+2. Install the required Python packages:
 
-
-2. Clone this repository or download the script file.
+    ```bash
+    pip install pygobject requests-html beautifulsoup4
+    ```
 
 ## Usage
 
-1. Open a terminal and navigate to the directory where the script is located.
+1. Run the application:
 
-2. Run the script using Python:
+    ```bash
+    python main.py
+    ```
 
+2. The application will open, fetching and displaying theme information from gnome-look.org.
 
-       python web-scraping.py
+3. Navigate through different theme pages using the page switcher.
 
+4. Click on the "Download" button to initiate the download for a specific theme.
 
-The script will scrape data from the gnome-look.org website and print a list of popular GNOME theme names along with the total number of themes found.
+## Contributing
 
-## Customization
+Contributions are welcome! If you encounter any issues or have ideas for enhancements, please feel free to submit pull requests.
 
-You can customize the script by modifying the `url_list` variable to include additional pages or changing the sorting criteria. You can also modify the scraping logic to extract additional information about each theme.
+1. Fork the repository.
+2. Create a new branch: `git checkout -b feature-name`.
+3. Make your changes and commit them: `git commit -m 'Add some feature'`.
+4. Push to the branch: `git push origin feature-name`.
+5. Open a pull request.
