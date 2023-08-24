@@ -23,7 +23,7 @@ To run the application, you'll need the following prerequisites:
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/yourusername/gtk-theme-app.git
+    git clone https://github.com/barisgungor10/gtk-theme-app.git
     cd gtk-theme-app
     ```
 
