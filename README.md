@@ -24,7 +24,7 @@ To run the application, you'll need the following prerequisites:
 
     ```bash
     git clone https://github.com/barisgungor10/GTK-Theme-Application.git
-    cd gtk-theme-app
+    cd GTK-Theme-Application
     ```
 
 2. Install the required Python packages:
